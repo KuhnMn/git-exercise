@@ -35,6 +35,7 @@ class Rectangle:
     def _interval_contains(self, lower, upper, n, tolerance=0.0):
         return lower - tolerance <= n <= upper + tolerance
 
+
     def _is_idx_on_upper_edge(self, i: int) -> bool:
         return i in [2, 3]
 
