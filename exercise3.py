@@ -29,14 +29,15 @@ class Rectangle:
         # Task A: remove duplication by defining a function
         #         that checks if a value is within an interval
         #         and reuse that here.
-        ll_px = point.x - self._lower_left.x
-        ll_py = point.y - self._lower_left.y
-        return ll_px >= 0 and ll_px <= self._dx \
-            and ll_py >= 0 and ll_py <= self._dy
+        return self._interval_contains(self._lower_left.x, self._lower_left.x + self._dx, point.x) \
+               and self._interval_contains(self._lower_left.y, self._lower_left.y + self._dy, point.y)
+
+    def _interval_contains(self, lower, upper, n):
+        return lower <= n <= upper
 
     def _is_idx_on_upper_edge(self, i: int) -> bool:
         return i in [2, 3]
-    
+
     def _is_idx_on_right_edge(self, i: int) -> bool:
         return i in [1, 3]
 
@@ -71,12 +72,12 @@ def test_rectangle_contains_tolerance() -> None:
     assert not rectangle.contains(upper_right)
 
     # Task B: make the tests below pass by adding optional tolerance argument to `contains`
-    assert not rectangle.contains(lower_left, tolerance=eps/2.0)
-    assert not rectangle.contains(upper_left, tolerance=eps/2.0)
-    assert not rectangle.contains(lower_right, tolerance=eps/2.0)
-    assert not rectangle.contains(upper_right, tolerance=eps/2.0)
+    assert not rectangle.contains(lower_left, tolerance=eps / 2.0)
+    assert not rectangle.contains(upper_left, tolerance=eps / 2.0)
+    assert not rectangle.contains(lower_right, tolerance=eps / 2.0)
+    assert not rectangle.contains(upper_right, tolerance=eps / 2.0)
 
-    assert rectangle.contains(lower_left, tolerance=eps*2.0)
-    assert rectangle.contains(upper_left, tolerance=eps*2.0)
-    assert rectangle.contains(lower_right, tolerance=eps*2.0)
-    assert rectangle.contains(upper_right, tolerance=eps*2.0)
+    assert rectangle.contains(lower_left, tolerance=eps * 2.0)
+    assert rectangle.contains(upper_left, tolerance=eps * 2.0)
+    assert rectangle.contains(lower_right, tolerance=eps * 2.0)
+    assert rectangle.contains(upper_right, tolerance=eps * 2.0)
